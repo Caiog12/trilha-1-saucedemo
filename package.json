@@ -1,0 +1,16 @@
+{
+  "name": "trilha-1-saucedemo",
+  "version": "1.0.0",
+  "description": "Testes E2E acadêmicos do fluxo de compra no SauceDemo",
+  "scripts": {
+    "test": "playwright test",
+    "report": "playwright show-report"
+  },
+  "type": "commonjs",
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.1"
+  }
+}

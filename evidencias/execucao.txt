@@ -1,0 +1,11 @@
+21/11/2026 — SauceDemo público — Playwright 1.65.1 e Chromium headless
+Oito execuções, cada uma com um teste selecionado.
+
+✓  1 tests/compra.spec.js:4:1 › login válido abre o catálogo (27.8s)
+✓  1 tests/compra.spec.js:11:1 › usuário bloqueado recebe mensagem e fica na tela de login (27.9s)
+✓  1 tests/compra.spec.js:17:1 › catálogo ordena todos os produtos por nome e por preço (27.8s)
+✓  1 tests/compra.spec.js:39:1 › carrinho mantém nomes e preços e atualiza a contagem após remover (27.7s)
+✓  1 tests/compra.spec.js:55:1 › checkout com dados válidos confirma a compra (27.7s)
+✓  1 tests/validacoes.spec.js:4:1 › ID-01 — senha inválida impede o login (27.8s)
+✓  1 tests/validacoes.spec.js:17:3 › ID-02 — checkout exige First Name (28.0s)
+✓  1 tests/validacoes.spec.js:17:3 › ID-03 — checkout exige Zip/Postal Code (27.8s)
