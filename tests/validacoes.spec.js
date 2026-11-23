@@ -7,9 +7,11 @@ test('ID-01 — senha inválida impede o login', async ({ page }, testInfo) => {
     'Username and password do not match',
   );
   await expect(page.getByRole('button', { name: 'Login', exact: true })).toBeVisible();
+  // Anexa evidência também quando a aplicação rejeita a senha como esperado.
   await testInfo.attach('ID-01', { body: await page.screenshot(), contentType: 'image/png' });
 });
 
+// Cada entrada declara um teste independente com seu próprio campo e mensagem.
 for (const { id, campo, mensagem } of [
   { id: 'ID-02', campo: 'First Name', mensagem: 'First Name is required' },
   { id: 'ID-03', campo: 'Zip/Postal Code', mensagem: 'Postal Code is required' },
@@ -21,6 +23,7 @@ for (const { id, campo, mensagem } of [
     await page.getByPlaceholder('First Name').fill('Nome');
     await page.getByPlaceholder('Last Name').fill('Teste');
     await page.getByPlaceholder('Zip/Postal Code').fill('50000');
+    // Deixa vazio apenas o campo avaliado neste cenário.
     await page.getByPlaceholder(campo).clear();
     await page.getByRole('button', { name: 'Continue', exact: true }).click();
 

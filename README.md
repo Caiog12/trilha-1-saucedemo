@@ -49,6 +49,6 @@ O Playwright fornece uma página nova para cada teste. `getByRole` localiza bot�
 
 ## Entrega
 
-A professora autorizou a defesa em dupla com Caio Gabriel Gomes Medeiros e Monique Rego.
+O enunciado prevê trabalho em trio. Confirme com a professora se a defesa pode ser feita em dupla e quais nomes devem constar no envio pelo portal.
 
 Publique os arquivos de projeto em um único repositório público no GitHub. Envie pelo portal o link, a trilha e a identificação acordada com a professora. A pasta de evidências faz parte da entrega. As pastas geradas pelo npm e pelo Playwright são ignoradas pelo Git. O roteiro da defesa está em [APRESENTACAO.md](APRESENTACAO.md).

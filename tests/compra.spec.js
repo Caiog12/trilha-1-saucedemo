@@ -21,11 +21,14 @@ test('catálogo ordena todos os produtos por nome e por preço', async ({ page }
   const precos = page.getByTestId('inventory-item-price');
   await expect(nomes.first()).toBeVisible();
 
+  // Usa os valores do catálogo para calcular a sequência esperada.
   const nomesIniciais = await nomes.allTextContents();
   expect(nomesIniciais.length).toBeGreaterThan(1);
   const precosIniciais = await precos.allTextContents();
+  // Remove o símbolo $ para comparar preços numericamente.
   const compararPrecos = (a, b) => Number(a.slice(1)) - Number(b.slice(1));
 
+  // Ordena cópias porque sort() altera o array em que é chamado.
   await ordem.selectOption('az');
   await expect(nomes).toHaveText([...nomesIniciais].sort());
   await ordem.selectOption('za');
@@ -46,6 +49,7 @@ test('carrinho mantém nomes e preços e atualiza a contagem após remover', asy
   await expect(mochila.getByTestId('inventory-item-price')).toHaveText('$29.99');
   await expect(lanterna.getByTestId('inventory-item-price')).toHaveText('$9.99');
 
+  // Remove apenas a mochila e confere o produto restante e o indicador.
   await mochila.getByRole('button', { name: 'Remove', exact: true }).click();
   await expect(mochila).toHaveCount(0);
   await expect(lanterna).toBeVisible();
@@ -64,8 +68,12 @@ test('checkout com dados válidos confirma a compra', async ({ page }) => {
   await expect(page.getByTestId('title')).toHaveText('Checkout: Overview');
   await expect(item(page, produto.mochila)).toBeVisible();
   await expect(item(page, produto.lanterna)).toBeVisible();
+  // O subtotal corresponde à soma dos dois produtos antes dos impostos.
   await expect(page.getByTestId('subtotal-label')).toHaveText('Item total: $39.98');
   await page.getByRole('button', { name: 'Finish', exact: true }).click();
-  await expect(page.getByTestId('complete-header')).toHaveText('Thank you for your order!');
+  // Confere a navegação e a confirmação visível em etapas separadas.
+  await expect(page).toHaveURL(/\/checkout-complete\.html$/);
+  await expect(page.getByText('Thank you for your order!', { exact: true })).toBeVisible();
+  // Após a compra, o indicador do carrinho deve desaparecer.
   await expect(page.getByTestId('shopping-cart-badge')).toHaveCount(0);
 });

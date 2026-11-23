@@ -5,6 +5,7 @@ const produto = {
   lanterna: 'Sauce Labs Bike Light',
 };
 
+// A função só tenta o login. Cada cenário verifica o resultado esperado.
 async function entrar(page, usuario = 'standard_user', senha = 'secret_sauce') {
   await page.goto('/');
   await page.getByPlaceholder('Username').fill(usuario);
@@ -12,6 +13,7 @@ async function entrar(page, usuario = 'standard_user', senha = 'secret_sauce') {
   await page.getByRole('button', { name: 'Login', exact: true }).click();
 }
 
+// Restringe ações como Remove à linha que contém o nome exato do produto.
 function item(page, nome) {
   return page.getByTestId('inventory-item').filter({
     has: page.getByText(nome, { exact: true }),
@@ -28,6 +30,7 @@ async function adicionarDoisProdutos(page) {
   await expect(page.getByTestId('title')).toHaveText('Your Cart');
 }
 
+// Reaproveita a preparação do carrinho nos testes de sucesso e de validação.
 async function iniciarCheckout(page) {
   await adicionarDoisProdutos(page);
   await page.getByRole('button', { name: 'Checkout', exact: true }).click();
